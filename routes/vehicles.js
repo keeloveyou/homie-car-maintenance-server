@@ -66,14 +66,14 @@ router.post('/', async (req, res) => {
 
     const { data, error } = await supabase
       .from('vehicles')
-      .insert([{ ...req.body, openid }])
+      .insert({ ...req.body, openid })
       .select()
-      .single()
     
     if (error) throw error
     
-    console.log('添加成功, ID:', data.id)
-    res.json({ data })
+    const result = data && data.length > 0 ? data[0] : data
+    console.log('添加成功, ID:', result.id)
+    res.json({ data: result })
   } catch (err) {
     console.error('添加错误:', err.message)
     res.status(500).json({ error: err.message })
@@ -105,12 +105,12 @@ router.put('/:id', async (req, res) => {
       .update(req.body)
       .eq('id', req.params.id)
       .select()
-      .single()
 
     if (error) throw error
 
-    console.log('更新成功, ID:', data.id)
-    res.json({ data })
+    const result = data && data.length > 0 ? data[0] : data
+    console.log('更新成功, ID:', result.id)
+    res.json({ data: result })
   } catch (err) {
     console.error('更新错误:', err.message)
     res.status(500).json({ error: err.message })
