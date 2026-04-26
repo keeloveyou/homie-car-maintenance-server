@@ -8,6 +8,7 @@ const maintenanceRouter = require('./routes/maintenance')
 const fuelExpensesRouter = require('./routes/fuel-expenses')
 const maintenanceExpensesRouter = require('./routes/maintenance-expenses')
 const remindersRouter = require('./routes/reminders')
+const driverLicensesRouter = require('./routes/driver-licenses')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -22,6 +23,7 @@ app.use('/api/maintenances', maintenanceRouter)
 app.use('/api/fuel-expenses', fuelExpensesRouter)
 app.use('/api/maintenance-expenses', maintenanceExpensesRouter)
 app.use('/api/reminders', remindersRouter)
+app.use('/api/driver-licenses', driverLicensesRouter)
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' })
